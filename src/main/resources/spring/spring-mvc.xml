@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/tx
+                     http://www.springframework.org/schema/tx/spring-tx.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context.xsd
+                     http://www.springframework.org/schema/aop
+                     http://www.springframework.org/schema/aop/spring-aop.xsd
+                     http://www.springframework.org/schema/jdbc
+                     http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+                     http://www.springframework.org/schema/util
+                     http://www.springframework.org/schema/util/spring-util-3.2.xsd
+                     http://www.springframework.org/schema/mvc
+                     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+    <!-- 配置SpringMVC -->
+    <!-- 1.开启SpringMVC注解模式 -->
+    <!-- 简化配置：
+        (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter
+        (2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持
+    -->
+    <!-- 处理请求返回json字符串的中文乱码问题 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+    <!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8" />
+        <property name="supportedMediaTypes">
+            <list>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg index="0" value="text" />
+                    <constructor-arg index="1" value="plain" />
+                    <constructor-arg index="2" value="UTF-8" />
+                </bean>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg index="0" value="*" />
+                    <constructor-arg index="1" value="*" />
+                    <constructor-arg index="2" value="UTF-8" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+            <!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+
+            <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+            <!--	         <bean id="fastJsonHttpMessageConverter"-->
+            <!--	               class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
+            <!--	             <property name="supportedMediaTypes">-->
+            <!--	                 <list>-->
+            <!--	                     <value>application/json;charset=UTF-8</value>-->
+            <!--	                 </list>-->
+            <!--	             </property>-->
+            <!--	         </bean>-->
+    </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!-- 2.静态资源默认servlet配置
+        (1)加入对静态资源的处理：js,gif,png
+        (2)允许使用"/"做整体映射
+     -->
+    <mvc:default-servlet-handler/>
+    <!-- 3.配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 4.扫描web相关的bean -->
+    <context:component-scan base-package="com.xx.controller"/>
+    <!--扫描utils包-->
+    <context:component-scan base-package="com.xx.utils"/>
+
+</beans>
