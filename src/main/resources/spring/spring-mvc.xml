@@ -86,6 +86,7 @@
 
             <!--配置哪些资源排除拦截操作-->
             <mvc:exclude-mapping path="/admin/login"/>
+            <mvc:exclude-mapping path="/admin/verify"/>
             <bean class="com.xx.interceptor.AdminInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

@@ -74,9 +74,13 @@ public class AdminController {
         return "admin/appoint";
     }
 
-    @RequestMapping(value = {"/books/{page}"})
-    private String books(@PathVariable(required = false,value = "page") int pageNo, Model model){
-        PageInfo<Book> page = adminService.getBookAll(pageNo, 5);
+    @RequestMapping(value = {"/books","/books/{page}"})
+    private String books(@PathVariable(value = "page",required = false) String pageNo, Model model){
+        int pageOn = 1;
+        if ("".equals(pageNo)||pageNo!=null){
+            pageOn = Integer.parseInt(pageNo);
+        }
+        PageInfo<Book> page = adminService.getBookAll(pageOn, 5);
         model.addAttribute("page",page);
         model.addAttribute("list",page.getList());
         System.out.println(page.getList());

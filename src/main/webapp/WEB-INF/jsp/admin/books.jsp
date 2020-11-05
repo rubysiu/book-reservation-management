@@ -80,14 +80,14 @@
 			<div class="page-wrap">
 				<ul class="pagination">
 
-						<li class="disabled"><span><a href="/amin/books/${page.firstPage}">«</a> </span></li>
-<%--						<c:forEach items="" var="">--%>
+						<li class="disabled"><span><a href="/admin/books/${page.firstPage}">«</a> </span></li>
+						<c:forEach begin="1" end="${page.pages}" var="pages">
 
-<%--						</c:forEach>--%>
-						<li class="active"><span>1</span></li>
-						<li>
-							<a href="#">2</a>
-						</li>
+							<li <c:if test="${page.pageNum==pages}">
+								class="active"
+							</c:if>><a href="/admin/books/${pages}"><span>${pages}</span></a></li>
+						</c:forEach>
+
 						<li>
 							<a href="/admin/books/${page.lastPage}">»</a>
 						</li>
