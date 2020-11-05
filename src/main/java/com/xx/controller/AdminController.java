@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,6 @@ public class AdminController {
     private String login(){
         return "/admin/login";
     }
-
 
     @RequestMapping(value = "/verify",method = RequestMethod.POST)
     @ResponseBody
@@ -75,7 +75,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/books/{page}"})
-    private String books(@PathVariable(value = "page",required = false) int pageNo, Model model){
+    private String books(@PathVariable(required = false,value = "page") int pageNo, Model model){
         PageInfo<Book> page = adminService.getBookAll(pageNo, 5);
         model.addAttribute("page",page);
         model.addAttribute("list",page.getList());

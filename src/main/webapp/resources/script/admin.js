@@ -6,6 +6,14 @@ var admin = {
             return '/admin/verify';
         }
     },
+    //退出
+    delCookie:function(){
+        $.removeCookie('token');
+        var token=$.cookie('token');
+        if(token ==null||!token){
+            location.href = "/admin"
+        }
+    },
     //验证学号和密码
     validateAdmin:function(token){
         if(!token){
@@ -37,7 +45,8 @@ var admin = {
                 if(data.result=='SUCCESS'){
                     window.location.reload();
                     //弹出登录成功！
-                    alert("登陆成功！");
+                    console.log("登陆成功！");
+                    window.location.href = "/admin"
                     result=true;
                 }else{
                     result=false;
@@ -72,39 +81,9 @@ var admin = {
                     }
                 });
             }else{
-                var appointbox=$('#appoint-box');
-                admin.appointment(bookId,studentId,appointbox);
+                window.location.href = "/admin"
             }
         }
     },
-    appointment:function(bookId,studentId, node){
-        console.log("我执行预约的方法!" );
-        node.html('<button class="btn btn-primary btn-lg" id="appointmentBtn">预约</button>');
 
-        var appointmentUrl = bookappointment.URL.appoint(bookId,studentId);
-        console.log("appointmentUrl:"+appointmentUrl);
-        //绑定一次点击事件
-        $('#appointmentBtn').one('click', function () {
-            //执行预约请求
-            //1、先禁用请求
-            $(this).addClass('disabled');
-            //2、发送预约请求执行预约
-            $.post(appointmentUrl,{},function(result){   //Ajax强大之处，向Controller方法提出请求和返回结果在一处!
-                if(result && result['success']){         //同时还可以连续取对象的子对象！
-                    var appointResult=result['data'];
-                    console.log("appointResult"+appointResult);
-                    var state=appointResult['state'];
-                    console.log("state"+state);
-                    var stateInfo=appointResult['stateInfo'];
-                    console.log("stateInfo"+stateInfo);
-                    //显示预约结果                                                          把结果显示给页面，完成了jsp的工作
-
-                    node.html('<span class="label label-success">'+stateInfo+'</span>');
-                }       //因为公用一个node所以，用来显示“stateInfo”时就不会显示上面的“预约”
-                console.log('result'+result);
-            });
-        });
-
-
-    },
 }

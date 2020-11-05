@@ -6,8 +6,10 @@
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
+		<%@include file="../common/head.jsp" %>
 		<link rel="stylesheet" type="text/css" href="/resources/static/admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="/resources/static/admin/css/admin.css"/>
+		<script src="/resources/script/admin.js"></script>
 	</head>
 	<body>
 		<div class="main-layout" id='main-layout'>
@@ -70,7 +72,7 @@
 					  <li class="layui-nav-item">
 					    <a href="javascript:;" data-url="admin-info.jsp" data-id='5' data-text="个人信息">${token}</a>
 					  </li>
-					  <li class="layui-nav-item"><a href="javascript:;">退出</a></li>
+					  <li class="layui-nav-item"><a href="javascript:admin.delCookie();">退出</a></li>
 					</ul>
 				</div>
 				<!--主体内容-->

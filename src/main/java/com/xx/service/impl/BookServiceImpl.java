@@ -1,6 +1,6 @@
 package com.xx.service.impl;
 
-import com.sun.org.slf4j.internal.LoggerFactory;
+
 import com.xx.dao.AppointmentDao;
 import com.xx.dao.BookDao;
 import com.xx.dao.StudentDao;
