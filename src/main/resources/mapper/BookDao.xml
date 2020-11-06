@@ -19,7 +19,6 @@
         <where>
 
             and name like '%' #{name} '%'
-
         </where>
     </select>
     <select id="findAll" resultType="book">
@@ -30,6 +29,11 @@
             number
         FROM
             book
+        <where>
+            <if test="name!='' and name!=null">
+                and name like '%' #{name} '%'
+            </if>
+        </where>
     </select>
 
     <update id="reduceNumber">

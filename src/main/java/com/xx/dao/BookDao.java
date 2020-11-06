@@ -24,7 +24,7 @@ public interface BookDao {
      * 查询所有
      * @return
      */
-    List<Book> findAll();
+    List<Book> findAll(@Param("name")String name);
 
     /**
      * 减少库存 判断是否还有库存

@@ -35,7 +35,8 @@ public class BookServiceImpl implements BookService {
     }
 
     public List<Book> getList() {
-        return bookDao.findAll();
+        String name = null;
+        return bookDao.findAll(name);
 
     }
 

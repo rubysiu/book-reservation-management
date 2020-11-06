@@ -51,11 +51,11 @@ public class AdminServiceImpl implements AdminService {
         return page;
     }
 
-    public PageInfo<Book> getBookAll(Integer pageNo, Integer pageSize) {
+    public PageInfo<Book> getBookAll(String name,Integer pageNo, Integer pageSize) {
         pageNo = pageNo == null ? 1 : pageNo;
         pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(pageNo, pageSize);
-        List<Book> list = bookDao.findAll();
+        List<Book> list = bookDao.findAll(name);
         //用PageInfo对结果进行包装
         PageInfo<Book> page = new PageInfo<Book>(list);
         return page;

@@ -12,5 +12,5 @@ public interface AdminService {
     Admin validate(String token);
 
     PageInfo<Appointment> queryByPage(Integer pageNo, Integer pageSize);
-    PageInfo<Book> getBookAll(Integer pageNo, Integer pageSize);
+    PageInfo<Book> getBookAll(String name,Integer pageNo, Integer pageSize);
 }

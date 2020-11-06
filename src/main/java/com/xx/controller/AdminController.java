@@ -75,12 +75,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/books","/books/{page}"})
-    private String books(@PathVariable(value = "page",required = false) String pageNo, Model model){
+    private String books(@PathVariable(value = "page",required = false) String pageNo,@RequestParam(value = "name",required = false,defaultValue = "")String name,Model model){
         int pageOn = 1;
         if ("".equals(pageNo)||pageNo!=null){
             pageOn = Integer.parseInt(pageNo);
         }
-        PageInfo<Book> page = adminService.getBookAll(pageOn, 5);
+        PageInfo<Book> page = adminService.getBookAll(name,pageOn, 5);
         model.addAttribute("page",page);
         model.addAttribute("list",page.getList());
         System.out.println(page.getList());
