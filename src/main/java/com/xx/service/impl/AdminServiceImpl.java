@@ -31,11 +31,11 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
-    public PageInfo<Appointment> queryByPage(Integer pageNo, Integer pageSize) {
+    public PageInfo<Appointment> queryByPage(Long studentId,Integer pageNo, Integer pageSize) {
         pageNo = pageNo == null ? 1 : pageNo;
         pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(pageNo, pageSize);
-        List<Appointment> list = appointmentDao.findAll();
+        List<Appointment> list = appointmentDao.findAll(studentId);
         //用PageInfo对结果进行包装
         PageInfo<Appointment> page = new PageInfo<Appointment>(list);
 //        System.out.println(page.getPageNum());
@@ -60,5 +60,4 @@ public class AdminServiceImpl implements AdminService {
         PageInfo<Book> page = new PageInfo<Book>(list);
         return page;
     }
-
 }

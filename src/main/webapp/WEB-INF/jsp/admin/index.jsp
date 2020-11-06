@@ -70,7 +70,7 @@
 					<ul class="layui-nav" lay-filter="rightNav">
 					  <li class="layui-nav-item"><a href="javascript:;" data-url="email.jsp" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i></a></li>
 					  <li class="layui-nav-item">
-					    <a href="javascript:;" data-url="admin-info.jsp" data-id='5' data-text="个人信息">${token}</a>
+					    <a data-url="/admin/adminInfo/${token}"  data-id='5' data-text="个人信息">${token}</a>
 					  </li>
 					  <li class="layui-nav-item"><a href="javascript:admin.delCookie();">退出</a></li>
 					</ul>

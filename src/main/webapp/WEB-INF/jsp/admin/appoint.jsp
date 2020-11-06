@@ -17,21 +17,22 @@
 		<form class="layui-form" action="">
 			<div class="layui-form-item">
 				<div class="layui-inline tool-btn">
-					<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="article-add.jsp"><i class="layui-icon">&#xe654;</i></button>
+<%--					<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="article-add.jsp"><i class="layui-icon">&#xe654;</i></button>--%>
 					<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.jsp"><i class="layui-icon">&#xe640;</i></button>
-					<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.jsp"><i class="iconfont">&#xe656;</i></button>
+<%--					<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.jsp"><i class="iconfont">&#xe656;</i></button>--%>
 				</div>
 				<div class="layui-inline">
-					<input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+<%--					required lay-verify="required"--%>
+					<input type="text" name="studentId" value="${studentId}" placeholder="请输入标题" autocomplete="off" class="layui-input">
 				</div>
-				<div class="layui-inline">
-					<select name="states" lay-filter="status">
-						<option value="">请选择一个状态</option>
-						<option value="010">正常</option>
-						<option value="021">停止</option>
-						<option value="0571">删除</option>
-					</select>
-				</div>
+<%--				<div class="layui-inline">--%>
+<%--					<select name="states" lay-filter="status">--%>
+<%--						<option value="">请选择一个状态</option>--%>
+<%--						<option value="010">正常</option>--%>
+<%--						<option value="021">停止</option>--%>
+<%--						<option value="0571">删除</option>--%>
+<%--					</select>--%>
+<%--				</div>--%>
 				<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
 			</div>
 		</form>
@@ -55,7 +56,7 @@
 					<th class="hidden-xs">书籍名称</th>
 					<th class="hidden-xs">书籍ID</th>
 					<th class="hidden-xs">预约时间</th>
-					<th>状态</th>
+<%--					<th>状态</th>--%>
 					<th>操作</th>
 				</tr>
 				</thead>
@@ -68,7 +69,7 @@
 							<td class="hidden-xs">${appoint.book.name}</td>
 							<td class="hidden-xs">${appoint.bookId}</td>
 							<td class="hidden-xs">${appoint.appointTime}</td>
-							<td><button class="layui-btn layui-btn-mini layui-btn-normal">正常</button></td>
+<%--							<td><button class="layui-btn layui-btn-mini layui-btn-normal">正常</button></td>--%>
 							<td>
 								<div class="layui-inline">
 									<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="${appoint.id}" data-url="article-detail.jsp"><i class="layui-icon">&#xe642;</i></button>
@@ -82,14 +83,17 @@
 			<div class="page-wrap">
 				<ul class="pagination">
 
-						<li class="disabled"><span><a href="${page.firstPage}">«</a> </span></li>
-						<li class="active"><span>1</span></li>
-						<li>
-							<a href="#">2</a>
-						</li>
-						<li>
-							<a href="${page.lastPage}">»</a>
-						</li>
+					<li class="disabled"><span><a href="/admin/appoint/${page.firstPage}?studentId=${studentId}">«</a> </span></li>
+					<c:forEach begin="1" end="${page.pages}" var="pages">
+
+						<li <c:if test="${page.pageNum==pages}">
+							class="active"
+						</c:if>><a href="/admin/appoint/${pages}?studentId=${studentId}"><span>${pages}</span></a></li>
+					</c:forEach>
+
+					<li>
+						<a href="/admin/appoint/${page.lastPage}?studentId=${studentId}">»</a>
+					</li>
 
 				</ul>
 			</div>

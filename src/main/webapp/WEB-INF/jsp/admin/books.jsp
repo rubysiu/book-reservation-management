@@ -22,7 +22,7 @@
 <%--					<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.jsp"><i class="iconfont">&#xe656;</i></button>--%>
 				</div>
 				<div class="layui-inline">
-					<input type="text" name="name" required lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+					<input type="text" name="name"   value="${name}" placeholder="请输入书名" autocomplete="off" class="layui-input">
 				</div>
 <%--				<div class="layui-inline">--%>
 <%--					<select name="states" lay-filter="status">--%>
@@ -80,16 +80,16 @@
 			<div class="page-wrap">
 				<ul class="pagination">
 
-						<li class="disabled"><span><a href="/admin/books/${page.firstPage}">«</a> </span></li>
+						<li class="disabled"><span><a href="/admin/books/${page.firstPage}?name=${name}">«</a> </span></li>
 						<c:forEach begin="1" end="${page.pages}" var="pages">
 
 							<li <c:if test="${page.pageNum==pages}">
 								class="active"
-							</c:if>><a href="/admin/books/${pages}"><span>${pages}</span></a></li>
+							</c:if>><a href="/admin/books/${pages}?name=${name}"><span>${pages}</span></a></li>
 						</c:forEach>
 
 						<li>
-							<a href="/admin/books/${page.lastPage}">»</a>
+							<a href="/admin/books/${page.lastPage}?name=${name}">»</a>
 						</li>
 
 				</ul>

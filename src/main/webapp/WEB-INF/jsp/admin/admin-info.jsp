@@ -12,50 +12,11 @@
 	<body>
 		<div class="layui-tab page-content-wrap">
 		  <ul class="layui-tab-title">
-		    <li class="layui-this">修改资料</li>
-		    <li>修改密码</li>
+		    <li class="layui-this">修改密码</li>
 		  </ul>
 		  <div class="layui-tab-content">
-		    <div class="layui-tab-item layui-show">
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;">
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">ID：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="id" disabled autocomplete="off" class="layui-input layui-disabled" value="1">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">用户名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label">姓名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">邮箱：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="email" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="5303588521@qq.com">
-				    </div>
-				  </div>
-				  <div class="layui-form-item layui-form-text">
-				    <label class="layui-form-label">备注：</label>
-				    <div class="layui-input-block">
-				      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo">立即提交</button>
-				    </div>
-				  </div>
-				</form>
-		    </div>
-		    <div class="layui-tab-item">
+
+		    <div class="ayui-tab-iteml layui-show">
 		    	<form class="layui-form" v style="width: 90%;padding-top: 20px;">
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">用户名：</label>

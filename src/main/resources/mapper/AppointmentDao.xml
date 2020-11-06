@@ -52,8 +52,12 @@
             FROM
                 book AS B,
                 appointment AS A
-            WHERE
-                B.book_id = A.book_id
+            <where>
+                and B.book_id = A.book_id
+                <if test="studentId!='' and studentId!=null">
+                    and A.student_id like concat('%',concat(#{studentId},'%'))
+                </if>
+            </where>
         </select>
 
 

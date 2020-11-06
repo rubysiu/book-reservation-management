@@ -1,6 +1,7 @@
 package com.xx.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.xx.domain.Admin;
 import com.xx.domain.Appointment;
 import com.xx.domain.Book;
@@ -65,10 +66,17 @@ public class AdminController {
         return "admin/welcome";
     }
 
-    @RequestMapping("/appoint")
-    private String appoint(Model model){
-//        adminService.getAppointAll(1,1);
-        PageInfo<Appointment> page = adminService.queryByPage(1, 5);
+    @RequestMapping(value = {"/appoint","/appoint/{page}"})
+    private String appoint(@PathVariable(value = "page",required = false) String pageNo,@RequestParam(value = "studentId",required = false,defaultValue = "")Long studentId,Model model){
+        int pageOn = 1;
+        if ("".equals(pageNo)||pageNo!=null){
+            pageOn = Integer.parseInt(pageNo);
+        }
+        if (studentId!=null||"".equals(studentId)){
+            pageOn = 1;
+        }
+        PageInfo<Appointment> page = adminService.queryByPage(studentId,pageOn, 5);
+        model.addAttribute("studentId",studentId);
         model.addAttribute("list",page.getList());
         model.addAttribute("page",page);
         return "admin/appoint";
@@ -80,13 +88,24 @@ public class AdminController {
         if ("".equals(pageNo)||pageNo!=null){
             pageOn = Integer.parseInt(pageNo);
         }
+        if (name!=null||"".equals(name)){
+            pageOn = 1;
+        }
         PageInfo<Book> page = adminService.getBookAll(name,pageOn, 5);
+        model.addAttribute("name",name);
         model.addAttribute("page",page);
         model.addAttribute("list",page.getList());
         System.out.println(page.getList());
         return "admin/books";
     }
 
+    @RequestMapping("/adminInfo/{token}")
+    private String adminInfo(@PathVariable(value = "token")String token, Model model){
+        Admin admin = adminService.validate(token);
+        System.out.println(admin);
+        model.addAttribute("admin",admin);
+        return "admin/admin-info";
+    }
     @RequestMapping("/articleList")
     private String articleList(){
         return "admin/article-list";
