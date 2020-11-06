@@ -34,8 +34,8 @@ public class Md5Utils {
                 buf.append(Integer.toHexString(i));
             }
             return buf.toString();
-            //System.out.println("result: " + buf.toString());// 32位的加密
-            //System.out.println("result: " + buf.toString().substring(8, 24));// 16位的加密
+            //System.out.println("result: " + buf.toString());// 32
+            //System.out.println("result: " + buf.toString().substring(8, 24));// 16
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
