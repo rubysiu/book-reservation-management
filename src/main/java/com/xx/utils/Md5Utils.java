@@ -12,7 +12,7 @@ import java.security.MessageDigest;
 public class Md5Utils {
 
     /**
-     * ×Ö·û´®µÄMD5
+     * md5
      * @param plainText
      * @return
      */
