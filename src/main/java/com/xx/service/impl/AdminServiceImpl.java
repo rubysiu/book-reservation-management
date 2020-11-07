@@ -31,6 +31,10 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
+    public int editToken(Integer id, String token, String password) {
+        return adminDao.editToken(id,token,password);
+    }
+
     public PageInfo<Appointment> queryByPage(Long studentId,Integer pageNo, Integer pageSize) {
         pageNo = pageNo == null ? 1 : pageNo;
         pageSize = pageSize == null ? 10 : pageSize;

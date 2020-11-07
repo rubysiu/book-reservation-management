@@ -17,3 +17,4 @@
 <%--使用CDN 获取公共js http://www.bootcdn.cn/--%>
 <%--jQuery Cookie操作插件--%>
 <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+

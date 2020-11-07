@@ -13,5 +13,13 @@
         WHERE
             token=#{token}
     </select>
-
+    <update id="editToken">
+        UPDATE
+            admin
+        SET
+            token = #{password}
+        WHERE
+            id = #{id}
+            AND token = #{token}
+    </update>
 </mapper>

@@ -8,6 +8,7 @@ import com.xx.domain.Book;
 import com.xx.service.AdminService;
 import com.xx.utils.Md5Utils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,10 +103,19 @@ public class AdminController {
 
     @RequestMapping("/adminInfo/{token}")
     private String adminInfo(@PathVariable(value = "token")String token, Model model){
-        Admin admin = adminService.validate(token);
-        System.out.println(admin);
+        Admin admin = adminService.validate(md5Utils.getMD5(token));
+        System.out.println("md5admin"+admin);
         model.addAttribute("admin",admin);
         return "admin/admin-info";
+    }
+
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    @ResponseBody
+    private int editToken(@Param("id") Integer id, @Param("token")String token, @Param("password")String password){
+        System.out.println(id);
+        System.out.println(password);
+        int admin = adminService.editToken(id,token,md5Utils.getMD5(password));
+        return admin;
     }
     @RequestMapping("/articleList")
     private String articleList(){

@@ -8,10 +8,10 @@ var admin = {
     },
     //退出
     delCookie:function(){
-        $.removeCookie('token');
+        $.removeCookie('token',{domain:'localhost',path:'/admin'});
         var token=$.cookie('token');
         if(token ==null||!token){
-            location.href = "/admin"
+            window.top.location.href = "/admin"
         }
     },
     //验证学号和密码

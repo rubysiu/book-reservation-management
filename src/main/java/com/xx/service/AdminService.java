@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface AdminService {
     Admin validate(String token);
-
+    int editToken(Integer id,String token,String password);
     PageInfo<Appointment> queryByPage(Long studentId,Integer pageNo, Integer pageSize);
     PageInfo<Book> getBookAll(String name,Integer pageNo, Integer pageSize);
 //    Admin findAdmin(String token);
