@@ -43,4 +43,14 @@
             book_id = #{bookId}
         AND number > 0
     </update>
+
+    <delete id="delBookById">
+        DELETE FROM book
+            WHERE book_id = #{bookId}
+    </delete>
+
+    <insert id="addBook">
+        INSERT  INTO book (name,introd,number)
+        VALUES (#{name},#{introd},#{number})
+    </insert>
 </mapper>

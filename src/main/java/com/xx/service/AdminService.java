@@ -14,5 +14,9 @@ public interface AdminService {
     int editToken(Integer id,String token,String password);
     PageInfo<Appointment> queryByPage(Long studentId,Integer pageNo, Integer pageSize);
     PageInfo<Book> getBookAll(String name,Integer pageNo, Integer pageSize);
+
+    int delBook(Integer[] bookIds);
+
+    int addBook(String name, String introd, int number);
 //    Admin findAdmin(String token);
 }

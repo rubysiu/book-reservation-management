@@ -32,4 +32,8 @@ public interface BookDao {
      * @return
      */
     int reduceNumber(long bookId);
+
+    int delBookById(Integer bookId);
+
+    int addBook(@Param("name") String name, @Param("introd") String introd, @Param("number") int number);
 }

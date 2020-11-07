@@ -70,14 +70,11 @@
 		  // });
 		  //监听密码提交
 		   form.on('submit(adminPassword)', function(data){
-			   // layer.msg(JSON.stringify(data.field));
-			   // layer.msg(JSON.stringify(data.field));
 			   var id = data.field.id;
 			   var token = data.field.token;
 			   var password = data.field.password;
-			   // console.log(id);
-			   // return  false;
-			   // alert(JSON.stringify(data.field));
+			   console.log(data.field);
+			   return  false;
 			   $.ajax({
 				   type: 'post',
 				   url: "/admin/edit",

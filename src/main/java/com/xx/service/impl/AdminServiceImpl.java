@@ -64,4 +64,16 @@ public class AdminServiceImpl implements AdminService {
         PageInfo<Book> page = new PageInfo<Book>(list);
         return page;
     }
+
+    public int delBook(Integer[] bookIds) {
+        int num = 0;
+        for (Integer bookId : bookIds) {
+            num =num+bookDao.delBookById(bookId);
+        }
+        return num;
+    }
+
+    public int addBook(String name, String introd, int number) {
+        return bookDao.addBook(name,introd,number);
+    }
 }

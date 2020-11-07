@@ -16,6 +16,7 @@ var admin = {
     },
     //验证学号和密码
     validateAdmin:function(token){
+
         if(!token){
             return "nothing";
         }else {

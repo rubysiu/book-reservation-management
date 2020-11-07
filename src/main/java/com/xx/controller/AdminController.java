@@ -100,7 +100,21 @@ public class AdminController {
         System.out.println(page.getList());
         return "admin/books";
     }
+    @RequestMapping(value = "/addBook",method = RequestMethod.POST)
+    @ResponseBody
+    private int addBook(String name,String introd,int number){
+        return adminService.addBook(name,introd,number);
 
+    }
+    @RequestMapping("/addBookInfo")
+    private String addBookInfo(){
+        return "admin/add-book";
+    }
+    @RequestMapping("/delBook/{bookId}")
+    @ResponseBody
+    private int delBook(@PathVariable("bookId") Integer[] bookIds){
+       return adminService.delBook(bookIds);
+    }
     @RequestMapping("/adminInfo/{token}")
     private String adminInfo(@PathVariable(value = "token")String token, Model model){
         Admin admin = adminService.validate(md5Utils.getMD5(token));
@@ -112,11 +126,12 @@ public class AdminController {
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ResponseBody
     private int editToken(@Param("id") Integer id, @Param("token")String token, @Param("password")String password){
-        System.out.println(id);
-        System.out.println(password);
-        int admin = adminService.editToken(id,token,md5Utils.getMD5(password));
-        return admin;
+        return adminService.editToken(id,token,md5Utils.getMD5(password));
+//        int admin = adminService.editToken(id,token,md5Utils.getMD5(password));
+//        return admin;
     }
+
+
     @RequestMapping("/articleList")
     private String articleList(){
         return "admin/article-list";
