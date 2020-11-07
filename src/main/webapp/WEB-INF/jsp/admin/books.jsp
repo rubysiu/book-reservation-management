@@ -14,7 +14,7 @@
 <body>
 <div class="wrap-container clearfix">
 	<div class="column-content-detail">
-		<form class="layui-form" action="">
+		<form class="layui-form" action="/admin/books/1?name=${name}">
 			<div class="layui-form-item">
 				<div class="layui-inline tool-btn">
 					<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="article-add.jsp"><i class="layui-icon">&#xe654;</i></button>

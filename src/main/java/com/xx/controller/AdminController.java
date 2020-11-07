@@ -72,9 +72,10 @@ public class AdminController {
         if ("".equals(pageNo)||pageNo!=null){
             pageOn = Integer.parseInt(pageNo);
         }
-        if (studentId!=null||"".equals(studentId)){
-            pageOn = 1;
-        }
+//        if (studentId!=null||"".equals(studentId)){
+//            pageOn = 1;
+//        }
+
         PageInfo<Appointment> page = adminService.queryByPage(studentId,pageOn, 5);
         model.addAttribute("studentId",studentId);
         model.addAttribute("list",page.getList());
@@ -88,9 +89,9 @@ public class AdminController {
         if ("".equals(pageNo)||pageNo!=null){
             pageOn = Integer.parseInt(pageNo);
         }
-        if (name!=null||"".equals(name)){
-            pageOn = 1;
-        }
+//        if (name.length()!= 0){
+//            pageOn = 1;
+//        }
         PageInfo<Book> page = adminService.getBookAll(name,pageOn, 5);
         model.addAttribute("name",name);
         model.addAttribute("page",page);
