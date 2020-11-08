@@ -59,6 +59,9 @@
                 </if>
             </where>
         </select>
-
+        <delete id="delAppointById">
+            DELETE FROM appointment
+            WHERE id = #{id}
+        </delete>
 
 </mapper>

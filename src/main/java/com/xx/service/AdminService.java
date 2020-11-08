@@ -18,5 +18,10 @@ public interface AdminService {
     int delBook(Integer[] bookIds);
 
     int addBook(String name, String introd, int number);
+    Book getById(long bookId);
+
+    int editBook(Long bookId, String name, String introd, Integer number);
+
+    int delAppoint(Integer[] ids);
 //    Admin findAdmin(String token);
 }

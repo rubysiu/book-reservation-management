@@ -15,27 +15,28 @@
 <body>
 <div class="wrap-container clearfix">
 	<div class="column-content-detail">
-		<form class="layui-form" action="/admin/books/1?name=${name}">
-			<div class="layui-form-item">
-				<div class="layui-inline tool-btn">
-					<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="/admin/addBookInfo"><i class="layui-icon">&#xe654;</i></button>
-					<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  ><i class="layui-icon">&#xe640;</i></button>
+		<div class="layui-form-item">
+			<div class="layui-inline tool-btn">
+				<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="/admin/addBookInfo"><i class="layui-icon">&#xe654;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  ><i class="layui-icon">&#xe640;</i></button>
 <%--					<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.jsp"><i class="iconfont">&#xe656;</i></button>--%>
-				</div>
+			</div>
+			<form class="layui-form layui-form-search" action="/admin/books/1?name=${name}">
 				<div class="layui-inline">
 					<input type="text" name="name"   value="${name}" placeholder="请输入书名" autocomplete="off" class="layui-input">
 				</div>
-<%--				<div class="layui-inline">--%>
-<%--					<select name="states" lay-filter="status">--%>
-<%--						<option value="">请选择一个状态</option>--%>
-<%--						<option value="010">正常</option>--%>
-<%--						<option value="021">停止</option>--%>
-<%--						<option value="0571">删除</option>--%>
-<%--					</select>--%>
-<%--				</div>--%>
+	<%--				<div class="layui-inline">--%>
+	<%--					<select name="states" lay-filter="status">--%>
+	<%--						<option value="">请选择一个状态</option>--%>
+	<%--						<option value="010">正常</option>--%>
+	<%--						<option value="021">停止</option>--%>
+	<%--						<option value="0571">删除</option>--%>
+	<%--					</select>--%>
+	<%--				</div>--%>
 				<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
-			</div>
-		</form>
+			</form>
+		</div>
+
 		<div class="layui-form" id="table-list">
 			<table class="layui-table" lay-even lay-skin="nob">
 <%--				<colgroup>--%>
@@ -69,7 +70,7 @@
 
 						<td>
 							<div class="layui-inline">
-								<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="article-detail.jsp"><i class="layui-icon">&#xe642;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-normal editBtn" data-id="1" data-url="/admin/editBookInfo/${book.bookId}"><i class="layui-icon">&#xe642;</i></button>
 								<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="/admin/delBook/${book.bookId}"><i class="layui-icon">&#xe640;</i></button>
 							</div>
 						</td>
@@ -111,6 +112,7 @@
 		var form = layui.form(),
 			$ = layui.jquery,
 			dialog = layui.dialog;
+		var iframeObj = $(window.frameElement).attr('name');
 		$('#table-list').on('click', '.del-btn', function() {
 			var url=$(this).attr('data-url');
 			var id = $(this).attr('data-id');
@@ -127,7 +129,7 @@
 								layer.msg("删除成功！", {
 									time: 1000,
 									end: function(){
-										location.href = location.href;
+										parent.window.frames[iframeObj].location.reload();
 
 									}
 								});
@@ -165,7 +167,7 @@
 											layer.msg("删除成功！", {
 												time: 1000,
 												end: function(){
-													location.href = location.href;
+													parent.window.frames[iframeObj].location.reload();
 												}
 											});
 										}else {
@@ -185,6 +187,30 @@
 		}).mouseenter(function() {
 
 			dialog.tips('批量删除', '.delBtn');
+
+		})
+
+		$('.addBtn').click(function() {
+			var url=$(this).attr('data-url');
+			//将iframeObj传递给父级窗口,执行操作完成刷新
+			parent.page("书籍添加", url, iframeObj, w = "700px", h = "620px");
+			return false;
+
+		}).mouseenter(function() {
+
+			dialog.tips('添加', '.addBtn');
+
+		})
+
+		$('.editBtn').click(function() {
+			var url=$(this).attr('data-url');
+			//将iframeObj传递给父级窗口,执行操作完成刷新
+			parent.page("书籍修改", url, iframeObj, w = "700px", h = "620px");
+			return false;
+
+		}).mouseenter(function() {
+
+			dialog.tips('添加', '.editBtn');
 
 		})
 	});

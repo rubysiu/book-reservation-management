@@ -1910,6 +1910,9 @@
 .email-tool-btn {
   margin-top: 3px;
 }
+.layui-form-search{
+  display: inline-block;
+}
 .email-tool-btn .layui-form-item {
   margin: 0;
 }

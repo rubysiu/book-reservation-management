@@ -76,4 +76,22 @@ public class AdminServiceImpl implements AdminService {
     public int addBook(String name, String introd, int number) {
         return bookDao.addBook(name,introd,number);
     }
+
+    public Book getById(long bookId) {
+        return bookDao.findById(bookId);
+    }
+
+    public int editBook(Long bookId, String name, String introd, Integer number) {
+        return bookDao.editBook(bookId,name,introd,number);
+    }
+
+    public int delAppoint(Integer[] ids) {
+        int num = 0;
+        for (Integer id : ids) {
+            System.out.println(id);
+            num =num+appointmentDao.delAppointById(id);
+        }
+        return num;
+
+    }
 }

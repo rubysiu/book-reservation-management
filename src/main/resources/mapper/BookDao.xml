@@ -53,4 +53,11 @@
         INSERT  INTO book (name,introd,number)
         VALUES (#{name},#{introd},#{number})
     </insert>
+
+    <update id="editBook">
+        UPDATE book
+        SET name = #{name}, introd = #{introd}, number =#{number}
+        WHERE
+            book_id = #{bookId}
+    </update>
 </mapper>

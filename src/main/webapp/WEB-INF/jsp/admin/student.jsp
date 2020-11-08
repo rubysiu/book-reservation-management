@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<title>网站后台管理模版</title>
-<%--	<%@include file="../common/head.jsp" %>--%>
+	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/resources/static/admin/layui/css/layui.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/static/admin/css/admin.css" />
 </head>
@@ -17,14 +17,13 @@
 	<div class="column-content-detail">
 		<div class="layui-form-item">
 			<div class="layui-inline tool-btn">
-<%--					<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="article-add.jsp"><i class="layui-icon">&#xe654;</i></button>--%>
-				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.jsp"><i class="layui-icon">&#xe640;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="/admin/addBookInfo"><i class="layui-icon">&#xe654;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  ><i class="layui-icon">&#xe640;</i></button>
 <%--					<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.jsp"><i class="iconfont">&#xe656;</i></button>--%>
 			</div>
-			<form class="layui-form layui-form-search" action="/admin/appoint/1?studentId=${studentId}" >
+			<form class="layui-form layui-form-search" action="/admin/books/1?name=${name}">
 				<div class="layui-inline">
-	<%--					required lay-verify="required"--%>
-					<input type="text" name="studentId" value="${studentId}" placeholder="请输入学号" autocomplete="off" class="layui-input">
+					<input type="text" name="studenId"   value="${name}" placeholder="请输入学号" autocomplete="off" class="layui-input">
 				</div>
 	<%--				<div class="layui-inline">--%>
 	<%--					<select name="states" lay-filter="status">--%>
@@ -53,66 +52,66 @@
 				<thead>
 				<tr>
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-					<th class="hidden-xs">ID</th>
-					<th class="hidden-xs">学生ID</th>
-					<th class="hidden-xs">书籍名称</th>
 					<th class="hidden-xs">书籍ID</th>
-					<th class="hidden-xs">预约时间</th>
-<%--					<th>状态</th>--%>
-					<th>操作</th>
+					<th class="hidden-xs">书籍名称</th>
+					<th class="hidden-xs">库存</th>
+					<th class="hidden-xs">简介</th>
+					<th class="hidden-xs">操作</th>
 				</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var="appoint" >
-						<tr>
-							<td><input type="checkbox" name="" lay-skin="primary"  value="${appoint.id}" data-id="${appoint.id}"></td>
-							<td class="hidden-xs">${appoint.id}</td>
-							<td class="hidden-xs">${appoint.studentId}</td>
-							<td class="hidden-xs">${appoint.book.name}</td>
-							<td class="hidden-xs">${appoint.bookId}</td>
-							<td class="hidden-xs">${appoint.appointTime}</td>
-<%--							<td><button class="layui-btn layui-btn-mini layui-btn-normal">正常</button></td>--%>
-							<td>
-								<div class="layui-inline">
-<%--									<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="${appoint.id}" data-url="/admin/editAnointInfo/${appoint.id}"><i class="layui-icon">&#xe642;</i></button>--%>
-									<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="${appoint.id}" data-url="/admin/delAppoint/${appoint.id}"><i class="layui-icon">&#xe640;</i></button>
-								</div>
-							</td>
-						</tr>
-					</c:forEach>
+				<c:forEach items="${list}" var="book" >
+					<tr>
+						<td><input type="checkbox" name="" lay-skin="primary"  value="${book.bookId}" data-id="${book.bookId}"></td>
+						<td class="hidden-xs">${book.bookId}</td>
+						<td class="hidden-xs">${book.name}</td>
+						<td class="hidden-xs">${book.number}</td>
+						<td class="hidden-xs">${book.introd}</td>
+
+						<td>
+							<div class="layui-inline">
+								<button class="layui-btn layui-btn-small layui-btn-normal editBtn" data-id="1" data-url="/admin/editBookInfo/${book.bookId}"><i class="layui-icon">&#xe642;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="/admin/delBook/${book.bookId}"><i class="layui-icon">&#xe640;</i></button>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+
 				</tbody>
 			</table>
 			<div class="page-wrap">
 				<ul class="pagination">
 
-					<li class="disabled"><span><a href="/admin/appoint/${page.firstPage}?studentId=${studentId}">«</a> </span></li>
-					<c:forEach begin="1" end="${page.pages}" var="pages">
+						<li class="disabled"><span><a href="/admin/books/${page.firstPage}?name=${name}">«</a> </span></li>
+						<c:forEach begin="1" end="${page.pages}" var="pages">
 
-						<li <c:if test="${page.pageNum==pages}">
-							class="active"
-						</c:if>><a href="/admin/appoint/${pages}?studentId=${studentId}"><span>${pages}</span></a></li>
-					</c:forEach>
+							<li <c:if test="${page.pageNum==pages}">
+								class="active"
+							</c:if>><a href="/admin/books/${pages}?name=${name}"><span>${pages}</span></a></li>
+						</c:forEach>
 
-					<li>
-						<a href="/admin/appoint/${page.lastPage}?studentId=${studentId}">»</a>
-					</li>
+						<li>
+							<a href="/admin/books/${page.lastPage}?name=${name}">»</a>
+						</li>
 
 				</ul>
 			</div>
 		</div>
 	</div>
 </div>
+
 <script src="/resources/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="/resources/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script>
 	if(${page.pageNum}>${page.lastPage}){
-		location.href = "/admin/appoint/${page.lastPage}?studentId=${studentId}"
+		location.href = "/admin/books/${page.lastPage}?name=${name}"
 	}
 
 	layui.use(['layer','dialog','form'], function(){
 		var form = layui.form(),
-				$ = layui.jquery,
-				dialog = layui.dialog;
+			$ = layui.jquery,
+			dialog = layui.dialog;
 		var iframeObj = $(window.frameElement).attr('name');
 		$('#table-list').on('click', '.del-btn', function() {
 			var url=$(this).attr('data-url');
@@ -130,7 +129,7 @@
 								layer.msg("删除成功！", {
 									time: 1000,
 									end: function(){
-										location.href = location.href;
+										parent.window.frames[iframeObj].location.reload();
 
 									}
 								});
@@ -155,30 +154,30 @@
 			child.each(function(index, item) {
 				if (item.checked ==true){
 
-					dialog.confirm({
-						message:'您确定要删除选中项',
-						success:function(){
-							$.ajax({
-								type: 'get',
-								url: '/admin/delAppoint/'+book_id,
-								dataType:'text',
-								success: function (res) {
-									if (res>0){
-										console.log(res)
-										layer.msg("删除成功！", {
-											time: 1000,
-											end: function(){
-												location.href = location.href;
-											}
-										});
-									}else {
-										layer.msg("删除失败")
+						dialog.confirm({
+							message:'您确定要删除选中项',
+							success:function(){
+								$.ajax({
+									type: 'get',
+									url: '/admin/delBook/'+book_id,
+									dataType:'text',
+									success: function (res) {
+										if (res>0){
+											console.log(res)
+											layer.msg("删除成功！", {
+												time: 1000,
+												end: function(){
+													parent.window.frames[iframeObj].location.reload();
+												}
+											});
+										}else {
+											layer.msg("删除失败")
+										}
 									}
-								}
-							});
-						},
-					})
-					return false;
+								});
+							},
+						})
+						return false;
 				}
 			});
 

@@ -13,16 +13,22 @@
 	<body>
 	<form class="layui-form column-content-detail">
 					<div class="layui-tab">
-						<ul class="layui-tab-title">
-							<li class="layui-this">文章内容</li>
+<%--						<ul class="layui-tab-title">--%>
+<%--							<li class="layui-this">文章内容</li>--%>
 <%--							<li>SEO优化</li>--%>
-						</ul>
+<%--						</ul>--%>
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
 								<div class="layui-form-item">
+									<label class="layui-form-label">BookId：</label>
+									<div class="layui-input-block ">
+										<input type="text" name="bookId" required lay-verify="required"  disabled value="${book.bookId}" placeholder="请输入BookId" autocomplete="off" class="layui-input layui-disabled">
+									</div>
+								</div>
+								<div class="layui-form-item">
 									<label class="layui-form-label">书名：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+										<input type="text" name="name" required lay-verify="required" value="${book.name}" placeholder="请输入书名" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 <%--								<div class="layui-form-item">--%>
@@ -58,7 +64,7 @@
 								<div class="layui-form-item layui-form-text">
 									<label class="layui-form-label">简介：</label>
 									<div class="layui-input-block">
-										<textarea class="layui-textarea " name="introd" lay-verify="content" id="LAY_demo_editor"></textarea>
+										<textarea class="layui-textarea " name="introd" lay-verify="content" id="LAY_demo_editor">${book.introd}</textarea>
 									</div>
 								</div>
 
@@ -77,7 +83,7 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">库存：</label>
 									<div class="layui-input-block">
-										<input type="text" name="number" required lay-verify="required" placeholder="库存" autocomplete="off" class="layui-input" value="10">
+										<input type="text" name="number" required lay-verify="required" placeholder="库存" autocomplete="off" value="${book.number}" class="layui-input" value="10">
 									</div>
 								</div>
 							</div>
@@ -99,7 +105,7 @@
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="addBook">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="editBook">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -154,28 +160,30 @@
 				// 	}
 				// });
 
-			form.on('submit(addBook)', function(data){
+			form.on('submit(editBook)', function(data){
+				var bookId = data.field.bookId;
 				var name = data.field.name;
 				var introd = data.field.introd;
 				var number = data.field.number;
 				$.ajax({
 					type: 'post',
-					url: "/admin/addBook",
+					url: "/admin/editBook",
 					data: {
-						name:name,introd:introd,number:number
+						bookId:bookId,name:name,introd:introd,number:number
 					},
 					dataType:'text',
 					success: function (res) {
-						console.log(res)
 						if (res>0){
-						layer.msg("添加成功！", {
+						layer.msg("修改成功！", {
 								time: 1000,
 								end: function(){
-									parent.location.reload();
+									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+									parent.layer.close(index); //再执行关闭
+									parent.window.frames['iframe2'].location.reload();
 								}
 							});
 						}else {
-							layer.msg("添加失败")
+							layer.msg("修改失败！")
 						}
 					}
 				});

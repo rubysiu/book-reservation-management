@@ -36,4 +36,6 @@ public interface BookDao {
     int delBookById(Integer bookId);
 
     int addBook(@Param("name") String name, @Param("introd") String introd, @Param("number") int number);
+
+    int editBook(@Param("bookId") Long bookId, @Param("name") String name, @Param("introd")String introd,@Param("number") Integer number);
 }

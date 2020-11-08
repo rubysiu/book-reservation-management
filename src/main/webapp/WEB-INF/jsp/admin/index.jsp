@@ -28,7 +28,7 @@
 				  <li class="layui-nav-item">
 				    <a href="javascript:;"><i class="iconfont">&#xe608;</i>学生管理</a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javascript:;" data-url="/admin/articleList" data-id='3' data-text="学生"><span class="l-line"></span>学生</a></dd>
+				      <dd><a href="javascript:;" data-url="/admin/student" data-id='3' data-text="学生"><span class="l-line"></span>学生</a></dd>
 <%--				      <dd><a href="javascript:;" data-url="/admin/danyeList" data-id='9' data-text="单页管理"><span class="l-line"></span>单页管理</a></dd>--%>
 				    </dl>
 				  </li>

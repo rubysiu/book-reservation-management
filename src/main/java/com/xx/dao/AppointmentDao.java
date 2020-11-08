@@ -15,4 +15,5 @@ public interface AppointmentDao {
 	List<Appointment> findAll(@Param("studentId") Long studentId);
 
 
+    int delAppointById(Integer id);
 }
