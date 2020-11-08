@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.xx.dao.AdminDao;
 import com.xx.dao.AppointmentDao;
 import com.xx.dao.BookDao;
+import com.xx.dao.StudentDao;
 import com.xx.domain.Admin;
 import com.xx.domain.Appointment;
 import com.xx.domain.Book;
+import com.xx.domain.Student;
 import com.xx.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class AdminServiceImpl implements AdminService {
     private AppointmentDao appointmentDao;
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private StudentDao studentDao;
+
     public Admin validate(String token) {
         return adminDao.findAdmin(token);
 
@@ -93,5 +98,15 @@ public class AdminServiceImpl implements AdminService {
         }
         return num;
 
+    }
+
+    public PageInfo<Student> getStudentAll(Long studentId, Integer pageNo, Integer pageSize) {
+        pageNo = pageNo == null ? 1 : pageNo;
+        pageSize = pageSize == null ? 10 : pageSize;
+        PageHelper.startPage(pageNo, pageSize);
+        List<Student> list = studentDao.getStudentAll(studentId);
+        //用PageInfo对结果进行包装
+        PageInfo<Student> page = new PageInfo<Student>(list);
+        return page;
     }
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 /**
  * Ñ§Éú
  */
@@ -17,5 +18,5 @@ public interface StudentDao {
      */
     Student findStudent(@Param("studentId") Long studentId,@Param("password") String password);
 
-    List<Student> getAll(@Param("offset") int offset,@Param("limit") int limit);
+    List<Student> getStudentAll(@Param("studentId") Long studentId);
 }

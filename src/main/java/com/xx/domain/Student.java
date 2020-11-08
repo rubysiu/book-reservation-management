@@ -14,7 +14,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "Student{" +
                 "studentId=" + studentId +
                 ", password='" + password + '\'' +
                 '}';

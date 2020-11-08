@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xx.domain.Admin;
 import com.xx.domain.Appointment;
 import com.xx.domain.Book;
+import com.xx.domain.Student;
 import com.xx.service.AdminService;
 import com.xx.utils.Md5Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -184,13 +185,33 @@ public class AdminController {
         return adminService.delAppoint(ids);
     }
 
+    /**
+     * Ñ§Éú
+     * @param pageNo
+     * @param studentId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = {"/student","/student/{page}",})
-    private String student(@PathVariable(value = "page",required = false) String pageNo,@RequestParam(value = "studenId",required = false,defaultValue = "")Long studenId,Model model){
+    private String student(@PathVariable(value = "page",required = false) String pageNo,@RequestParam(value = "studentId",required = false,defaultValue = "")Long studentId,Model model){
+        int pageOn = 1;
+        if ("".equals(pageNo)||pageNo!=null){
+            pageOn = Integer.parseInt(pageNo);
+        }
+        PageInfo<Student> page = adminService.getStudentAll(studentId,pageOn,5);
+        model.addAttribute("studentId",studentId);
+        model.addAttribute("page",page);
+        model.addAttribute("list",page.getList());
         return "admin/student";
     }
-
-    @RequestMapping("/danyeList")
-    private String danyeList(){
-        return "admin/danye-list";
+    @RequestMapping("/addStudentInfo")
+    private String addStudentInfo(){
+        return "admin/student-add";
     }
+    @RequestMapping("/editStudentInfo")
+    private String editStudentInfo(){
+        return "admin/student-edit";
+    }
+
+
 }

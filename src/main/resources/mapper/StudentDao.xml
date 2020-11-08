@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xx.dao.StudentDao">
-    <select id="findStudent" resultType="Student">
+    <select id="findStudent" resultType="student">
         SELECT
             student_id,
             password
@@ -13,6 +13,17 @@
             student_id=#{studentId}
         AND password=#{password}
     </select>
-
+    <select id="getStudentAll" resultType="student">
+        SELECT
+            student_id,
+            password
+        FROM
+            student
+        <if test="studentId!='' and studentId!=null">
+            <where>
+                AND student_id LIKE concat('%',concat(#{studentId},'%'))
+            </where>
+        </if>
+    </select>
 
 </mapper>

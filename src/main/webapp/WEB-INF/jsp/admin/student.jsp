@@ -17,13 +17,13 @@
 	<div class="column-content-detail">
 		<div class="layui-form-item">
 			<div class="layui-inline tool-btn">
-				<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="/admin/addBookInfo"><i class="layui-icon">&#xe654;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="/admin/addStudentInfo"><i class="layui-icon">&#xe654;</i></button>
 				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  ><i class="layui-icon">&#xe640;</i></button>
 <%--					<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.jsp"><i class="iconfont">&#xe656;</i></button>--%>
 			</div>
-			<form class="layui-form layui-form-search" action="/admin/books/1?name=${name}">
+			<form class="layui-form layui-form-search" action="/admin/student/1?studenId=${studenId}">
 				<div class="layui-inline">
-					<input type="text" name="studenId"   value="${name}" placeholder="请输入学号" autocomplete="off" class="layui-input">
+					<input type="text" name="studentId"   value="${studenId}" placeholder="请输入学号" autocomplete="off" class="layui-input">
 				</div>
 	<%--				<div class="layui-inline">--%>
 	<%--					<select name="states" lay-filter="status">--%>
@@ -52,26 +52,21 @@
 				<thead>
 				<tr>
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-					<th class="hidden-xs">书籍ID</th>
-					<th class="hidden-xs">书籍名称</th>
-					<th class="hidden-xs">库存</th>
-					<th class="hidden-xs">简介</th>
-					<th class="hidden-xs">操作</th>
+					<th class="hidden-xs">学号</th>
+					<th class="hidden-xs">密码</th>
+					<th>操作</th>
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="book" >
+				<c:forEach items="${list}" var="i" >
 					<tr>
-						<td><input type="checkbox" name="" lay-skin="primary"  value="${book.bookId}" data-id="${book.bookId}"></td>
-						<td class="hidden-xs">${book.bookId}</td>
-						<td class="hidden-xs">${book.name}</td>
-						<td class="hidden-xs">${book.number}</td>
-						<td class="hidden-xs">${book.introd}</td>
-
+						<td><input type="checkbox" name="" lay-skin="primary"  value="${i.studentId}" data-id="${i.studentId}"></td>
+						<td class="hidden-xs">${i.studentId}</td>
+						<td class="hidden-xs">${i.password}</td>
 						<td>
 							<div class="layui-inline">
-								<button class="layui-btn layui-btn-small layui-btn-normal editBtn" data-id="1" data-url="/admin/editBookInfo/${book.bookId}"><i class="layui-icon">&#xe642;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="/admin/delBook/${book.bookId}"><i class="layui-icon">&#xe640;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-normal editBtn" data-id="1" data-url="/admin/editStudentInfo/${i.studentId}"><i class="layui-icon">&#xe642;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="/admin/delBook/${i.studentId}"><i class="layui-icon">&#xe640;</i></button>
 							</div>
 						</td>
 					</tr>
@@ -82,16 +77,16 @@
 			<div class="page-wrap">
 				<ul class="pagination">
 
-						<li class="disabled"><span><a href="/admin/books/${page.firstPage}?name=${name}">«</a> </span></li>
+						<li class="disabled"><span><a href="/admin/student/${page.firstPage}?studenId=${studenId}">«</a> </span></li>
 						<c:forEach begin="1" end="${page.pages}" var="pages">
 
 							<li <c:if test="${page.pageNum==pages}">
 								class="active"
-							</c:if>><a href="/admin/books/${pages}?name=${name}"><span>${pages}</span></a></li>
+							</c:if>><a href="/admin/student/${pages}?studenId=${studenId}"><span>${pages}</span></a></li>
 						</c:forEach>
 
 						<li>
-							<a href="/admin/books/${page.lastPage}?name=${name}">»</a>
+							<a href="/admin/student/${page.lastPage}?studenId=${studenId}">»</a>
 						</li>
 
 				</ul>
@@ -105,8 +100,9 @@
 <script src="/resources/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script>
 	if(${page.pageNum}>${page.lastPage}){
-		location.href = "/admin/books/${page.lastPage}?name=${name}"
+		location.href = "/admin/student/${page.lastPage}?studenId=${studenId}"
 	}
+
 
 	layui.use(['layer','dialog','form'], function(){
 		var form = layui.form(),

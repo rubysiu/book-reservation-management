@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xx.domain.Admin;
 import com.xx.domain.Appointment;
 import com.xx.domain.Book;
+import com.xx.domain.Student;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,5 +24,7 @@ public interface AdminService {
     int editBook(Long bookId, String name, String introd, Integer number);
 
     int delAppoint(Integer[] ids);
+
+    PageInfo<Student> getStudentAll(Long studentId,Integer pageNo, Integer pageSize);
 //    Admin findAdmin(String token);
 }
