@@ -19,4 +19,12 @@ public interface StudentDao {
     Student findStudent(@Param("studentId") Long studentId,@Param("password") String password);
 
     List<Student> getStudentAll(@Param("studentId") Long studentId);
+
+    int delStudent(int id);
+
+    Student getStudentById(Long studentId);
+
+    int editStudent(@Param("id") Integer id, @Param("studentId") Long studentId,@Param("password") String password);
+
+    int addStudent(@Param("studentId")Long studentId, @Param("password") String password);
 }

@@ -28,7 +28,7 @@ public class tone {
     @Autowired
     private BookService bookService;
     @Autowired
-    private AdminServiceImpl adminService;
+    private AdminService adminService;
     @Test
     public void test1() {
 
@@ -43,5 +43,12 @@ public class tone {
         System.out.println(admin);
     }
 
-
+    @Test
+    public void test3() {
+        System.out.println("editStudent"+adminService.editStudent(8,1234521312l,"qs12345"));
+    }
+    @Test
+    public void test4() {
+        System.out.println("editStudent"+adminService.addStudent(12345212l,"qs12345"));
+    }
 }

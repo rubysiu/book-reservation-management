@@ -109,4 +109,25 @@ public class AdminServiceImpl implements AdminService {
         PageInfo<Student> page = new PageInfo<Student>(list);
         return page;
     }
+
+    public int delStudent(Integer[] ids) {
+        int num = 0;
+        for (int id : ids) {
+            System.out.println(id);
+            num =num+studentDao.delStudent(id);
+        }
+        return num;
+    }
+
+    public Student getStudentById(Long studentId) {
+        return studentDao.getStudentById(studentId);
+    }
+
+    public int editStudent(Integer id, Long studentId, String password) {
+        return studentDao.editStudent(id,studentId,password);
+    }
+
+    public int addStudent(Long studentId, String password) {
+        return studentDao.addStudent(studentId,password);
+    }
 }

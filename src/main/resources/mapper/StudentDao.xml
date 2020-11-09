@@ -15,6 +15,7 @@
     </select>
     <select id="getStudentAll" resultType="student">
         SELECT
+            id,
             student_id,
             password
         FROM
@@ -25,5 +26,29 @@
             </where>
         </if>
     </select>
+    <delete id="delStudent">
+        DELETE
+        FROM student
+        WHERE id = #{id}
+    </delete>
+    <select id="getStudentById" resultType="student" parameterType="long">
+        SELECT
+            id,
+            student_id,
+            password
+        FROM
+            student
+        WHERE
+            id = #{id}
+    </select>
+    <update id="editStudent">
+        UPDATE student
+        SET student_id = #{studentId},password = #{password}
+        WHERE id = #{id}
+    </update>
+    <insert id="addStudent">
+        INSERT INTO student (student_id,password)
+        VALUES (#{studentId},#{password})
 
+    </insert>
 </mapper>

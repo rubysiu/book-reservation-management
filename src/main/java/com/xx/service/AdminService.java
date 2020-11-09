@@ -26,5 +26,13 @@ public interface AdminService {
     int delAppoint(Integer[] ids);
 
     PageInfo<Student> getStudentAll(Long studentId,Integer pageNo, Integer pageSize);
+
+    int delStudent(Integer[] ids);
+
+    Student getStudentById(Long studentId);
+
+    int editStudent(Integer id, Long studentId, String password);
+
+    int addStudent(Long studentId, String password);
 //    Admin findAdmin(String token);
 }

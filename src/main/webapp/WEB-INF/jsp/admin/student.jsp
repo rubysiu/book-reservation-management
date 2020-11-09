@@ -60,13 +60,13 @@
 				<tbody>
 				<c:forEach items="${list}" var="i" >
 					<tr>
-						<td><input type="checkbox" name="" lay-skin="primary"  value="${i.studentId}" data-id="${i.studentId}"></td>
+						<td><input type="checkbox" name="" lay-skin="primary"  value="${i.id}" data-id="${i.id}"></td>
 						<td class="hidden-xs">${i.studentId}</td>
 						<td class="hidden-xs">${i.password}</td>
 						<td>
 							<div class="layui-inline">
-								<button class="layui-btn layui-btn-small layui-btn-normal editBtn" data-id="1" data-url="/admin/editStudentInfo/${i.studentId}"><i class="layui-icon">&#xe642;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="/admin/delBook/${i.studentId}"><i class="layui-icon">&#xe640;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-normal editBtn" data-id="1" data-url="/admin/editStudentInfo/${i.id}"><i class="layui-icon">&#xe642;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="/admin/delStudent/${i.id}"><i class="layui-icon">&#xe640;</i></button>
 							</div>
 						</td>
 					</tr>
@@ -140,11 +140,11 @@
 		});
 
 		$('.delBtn').click(function() {
-			var book_id =[];
+			var id =[];
 			var child = $("table").find('tbody input[type="checkbox"]');
 			for (let i = 0; i <child.length; i++) {
 				if (child[i].checked==true){
-					book_id.push(child[i].value);
+					id.push(child[i].value);
 				}
 			}
 			child.each(function(index, item) {
@@ -155,7 +155,7 @@
 							success:function(){
 								$.ajax({
 									type: 'get',
-									url: '/admin/delBook/'+book_id,
+									url: '/admin/delStudent/'+id,
 									dataType:'text',
 									success: function (res) {
 										if (res>0){
@@ -189,7 +189,7 @@
 		$('.addBtn').click(function() {
 			var url=$(this).attr('data-url');
 			//将iframeObj传递给父级窗口,执行操作完成刷新
-			parent.page("书籍添加", url, iframeObj, w = "700px", h = "620px");
+			parent.page("用户添加", url, iframeObj, w = "700px", h = "620px");
 			return false;
 
 		}).mouseenter(function() {
@@ -201,7 +201,7 @@
 		$('.editBtn').click(function() {
 			var url=$(this).attr('data-url');
 			//将iframeObj传递给父级窗口,执行操作完成刷新
-			parent.page("书籍修改", url, iframeObj, w = "700px", h = "620px");
+			parent.page("用户修改", url, iframeObj, w = "700px", h = "620px");
 			return false;
 
 		}).mouseenter(function() {

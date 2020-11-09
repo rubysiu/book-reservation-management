@@ -204,14 +204,48 @@ public class AdminController {
         model.addAttribute("list",page.getList());
         return "admin/student";
     }
+    /**
+     * 删除学生
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/delStudent/{id}")
+    @ResponseBody
+    private int delStudent(@PathVariable(value = "id",required = false)Integer[] ids){
+        return adminService.delStudent(ids);
+    }
+
+    /**
+     * 添加学生
+     * @return
+     */
     @RequestMapping("/addStudentInfo")
     private String addStudentInfo(){
         return "admin/student-add";
     }
-    @RequestMapping("/editStudentInfo")
-    private String editStudentInfo(){
+    @RequestMapping("/addStudent")
+    @ResponseBody
+    private int addStudent(Long studentId,String password){
+        return adminService.addStudent(studentId,md5Utils.getMD5(password));
+    }
+    /**
+     * 修改学生信息
+     * @param studentId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/editStudentInfo/{studentId}")
+    private String editStudentInfo(@PathVariable(value = "studentId")Long studentId,Model model){
+        Student student = adminService.getStudentById(studentId);
+        model.addAttribute("list",student);
+        System.out.println("adminServiceGetStudent"+student);
         return "admin/student-edit";
     }
-
+    @RequestMapping(value = "/editStudent",method = RequestMethod.POST)
+    @ResponseBody
+    private int editStudent(Integer id,Long studentId,String password){
+        System.out.println("md5password"+md5Utils.getMD5(password));
+            return adminService.editStudent(id,studentId,md5Utils.getMD5(password));
+    }
 
 }

@@ -20,86 +20,23 @@
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
 								<div class="layui-form-item">
-									<label class="layui-form-label">书名：</label>
+									<label class="layui-form-label">学号：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+										<input type="text" name="studentId" required lay-verify="required" placeholder="请输入学号" autocomplete="off" class="layui-input">
 									</div>
 								</div>
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">分类栏目：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<select name="category" lay-verify="required">--%>
-<%--											<option value="">请选择分类栏目</option>--%>
-<%--												<option value="1">公司新闻</option>--%>
-<%--												<option value="2">行业新闻</option>--%>
-<%--										</select>--%>
-<%--									</div>--%>
-<%--								</div>--%>
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">图像上传：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<input type="file" name="file（可随便定义）" class="layui-upload-file">--%>
-<%--									</div>--%>
-<%--								</div>--%>
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">标签：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<input type="checkbox" name="label[tj]" title="推荐" checked>--%>
-<%--										<input type="checkbox" name="label[zd]" title="置顶">--%>
-<%--										<input type="checkbox" name="label[hot]" title="热门">--%>
-<%--									</div>--%>
-<%--								</div>--%>
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">是否单页：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<input type="checkbox" name="switch" lay-skin="switch">--%>
-<%--									</div>--%>
-<%--								</div>--%>
-								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">简介：</label>
-									<div class="layui-input-block">
-										<textarea class="layui-textarea " name="introd" lay-verify="content" id="LAY_demo_editor"></textarea>
-									</div>
-								</div>
-
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">文章来源：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<input type="text" name="laiyuan" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input">--%>
-<%--									</div>--%>
-<%--								</div>--%>
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">文章排序：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<input type="text" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">--%>
-<%--									</div>--%>
-<%--								</div>--%>
 								<div class="layui-form-item">
-									<label class="layui-form-label">库存：</label>
+									<label class="layui-form-label">密码：</label>
 									<div class="layui-input-block">
-										<input type="text" name="number" required lay-verify="required" placeholder="库存" autocomplete="off" class="layui-input" value="10">
+										<input type="text" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" >
 									</div>
 								</div>
 							</div>
-<%--							<div class="layui-tab-item">--%>
-<%--								<div class="layui-form-item">--%>
-<%--									<label class="layui-form-label">关键字：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<input type="text" name="laiyuan" placeholder="请输入关键字" autocomplete="off" class="layui-input">--%>
-<%--									</div>--%>
-<%--								</div>--%>
-<%--								<div class="layui-form-item layui-form-text">--%>
-<%--									<label class="layui-form-label">描述：</label>--%>
-<%--									<div class="layui-input-block">--%>
-<%--										<textarea placeholder="请输入内容" class="layui-textarea"></textarea>--%>
-<%--									</div>--%>
-<%--								</div>--%>
-<%--							</div>--%>
 						</div>
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="addBook">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="addStudent">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -111,60 +48,15 @@
 				var form = layui.form(),
 					layer = layui.layer,
 					$ = layui.jquery,
-					laypage = layui.laypage,
-					laydate = layui.laydate,
-					layedit = layui.layedit,
-					common = layui.common,
-					tool = layui.tool,
-					element = layui.element(),
 					dialog = layui.dialog;
-
-				// //获取当前iframe的name值
-				// var iframeObj = $(window.frameElement).attr('name');
-				// //创建一个编辑器
-				// var editIndex = layedit.build('LAY_demo_editor', {
-				// 	tool: ['strong' //加粗
-				// 		, 'italic' //斜体
-				// 		, 'underline' //下划线
-				// 		, 'del' //删除线
-				// 		, '|' //分割线
-				// 		, 'left' //左对齐
-				// 		, 'center' //居中对齐
-				// 		, 'right' //右对齐
-				// 		, 'link' //超链接
-				// 		, 'unlink' //清除链接
-				// 		, 'image' //插入图片
-				// 	],
-				// 	height: 100
-				// })
-				// //全选
-				// form.on('checkbox(allChoose)', function(data) {
-				// 	var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-				// 	child.each(function(index, item) {
-				// 		item.checked = data.elem.checked;
-				// 	});
-				// 	form.render('checkbox');
-				// });
-				// form.render();
-
-				// layui.upload({
-				// 	url: '上传接口url',
-				// 	success: function(res) {
-				// 		console.log(res); //上传成功返回值，必须为json格式
-				// 	}
-				// });
-			//顶部添加
-
-
-			form.on('submit(addBook)', function(data){
-				var name = data.field.name;
-				var introd = data.field.introd;
-				var number = data.field.number;
+			form.on('submit(addStudent)', function(data){
+				var studentId = data.field.studentId;
+				var password = data.field.password;
 				$.ajax({
 					type: 'post',
-					url: "/admin/addBook",
+					url: "/admin/addStudent",
 					data: {
-						name:name,introd:introd,number:number
+						studentId:studentId,password:password
 					},
 					dataType:'text',
 					success: function (res) {
@@ -175,6 +67,7 @@
 								end: function(){
 									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 									parent.layer.close(index); //再执行关闭
+									parent.window.frames['iframe3'].location.reload();
 								}
 							});
 						}else {

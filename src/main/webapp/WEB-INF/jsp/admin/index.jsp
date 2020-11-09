@@ -68,7 +68,7 @@
 						</a>
 					</div>
 					<ul class="layui-nav" lay-filter="rightNav">
-					  <li class="layui-nav-item"><a href="javascript:;" data-url="email.jsp" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i></a></li>
+<%--					  <li class="layui-nav-item"><a href="javascript:;" data-url="email.jsp" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i></a></li>--%>
 					  <li class="layui-nav-item">
 					    <a data-url="/admin/adminInfo/${token}"  data-id='5' data-text="个人信息">${token}</a>
 					  </li>

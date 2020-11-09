@@ -1,6 +1,7 @@
 package com.xx.domain;
 
 public class Student {
+    private Integer id;
     private Long studentId;
     private String password;
 
@@ -12,10 +13,19 @@ public class Student {
         this.password = password;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
-                "studentId=" + studentId +
+                "id=" + id +
+                ", studentId=" + studentId +
                 ", password='" + password + '\'' +
                 '}';
     }
